@@ -85,9 +85,9 @@ python run_basics.py #Can run only with python and tensorflow
 
 ## Contacts
 
-Please contact [Yao Feng](fengyao@sjtu.edu.cn) or open an issue for any questions or suggestions(like, push me to add more applications).
+Please contact <a href="fengyao@sjtu.edu.cn">Yao Feng</a> or open an issue for any questions or suggestions(like, push me to add more applications).
 
-Thanks! (*^▽^*)
+Thanks! (●'◡'●)
 
 
 
