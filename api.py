@@ -110,9 +110,9 @@ class PRN:
         cropped_image = warp(image, tform.inverse, output_shape=(self.resolution_inp, self.resolution_inp))
 
         # run our net
-        st = time()
+        #st = time()
         cropped_pos = self.net_forward(cropped_image)
-        print 'net time:', time() - st
+        #print 'net time:', time() - st
 
         # restore 
         cropped_pos = np.squeeze(cropped_pos)
