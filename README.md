@@ -14,7 +14,7 @@ The main features are:
 
 * **End-to-End**  our method can directly regress the 3D facial structure and dense alignment from a single image bypassing 3DMM fitting.
 
-* **Multi-task**  By regressing position map, the 3D geometry along with semantic meaning can be obtained. Thus, we can effortlessly complete the tasks of dense alignment, monocular 3D face reconstruction, etc.
+* **Multi-task**  By regressing position map, the 3D geometry along with semantic meaning can be obtained. Thus, we can effortlessly complete the tasks of dense alignment, monocular 3D face reconstruction, pose estimation, etc.
 
 * **Faster than real-time**  The method can run at over 100fps(with GTX 1080) to regress a position map.
 
@@ -43,6 +43,10 @@ Get the 3D vertices and corresponding colours from a single image.  Save the res
 ### More(To be added)
 
 * #### 3D Pose Estimation
+
+  Rather than only use 68 key points to calculate the camera matrix(easily effected by expression and poses), we use all vertices(more than 40K) to calculate a more accurate pose.
+
+  #### ![pose](Docs/images/pose.jpg)
 
 * #### Texture Fusion
 
@@ -79,6 +83,7 @@ cd PRNet
 
 ```bash
 python run_basics.py #Can run only with python and tensorflow
+python run.py # need dlib and opencv(show the alignment and pose results).
 ```
 
 
