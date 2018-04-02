@@ -6,7 +6,7 @@
 
 
 
-This is an official python implementation of PRN. 
+This is an official python implementation of PRN.  The training code will be released(about two months later).
 
 PRN is a method to jointly regress dense alignment and 3D face shape in an end-to-end manner. More examples on Multi-PIE and 300VW can be seen in [YouTube](https://youtu.be/tXTgLSyIha8) .
 
@@ -63,9 +63,9 @@ Get the 3D vertices and corresponding colours from a single image.  Save the res
 
   Optional:
 
-* dlib (for detecting face.  You do not have to install if you can provide bounding box information)
+* dlib (for detecting face.  You do not have to install if you can provide bounding box information. )
 
-* opencv2 (for extracting textures)
+* opencv2 (for showing results)
 
 GPU is highly recommended. The run time is ~0.01s with GPU(GeForce GTX 1080) and ~0.2s with CPU(Intel(R) Xeon(R) CPU E5-2640 v4 @ 2.40GHz).
 
@@ -79,12 +79,16 @@ cd PRNet
 ```
 
 2. Download the PRN trained model at [BaiduDrive](https://pan.baidu.com/s/10vuV7m00OHLcsihaC-Adsw) or [GoogleDrive](https://drive.google.com/file/d/1UoE-XuW1SDLUjZmJPkIZ1MLxvQFgmTFH/view?usp=sharing), and put it into `Data/net-data`
-3. Run the test code.
 
-```bash
-python run_basics.py #Can run only with python and tensorflow
-python run.py # need dlib and opencv(show the alignment and pose results).
-```
+3. Run the test code.(test AFLW2000 images)
+
+   `python run_basics.py #Can run only with python and tensorflow`
+
+4. Run with your own images
+
+   `python demo.py -i <inputDir> -o <outputDir> --isDlib True  `
+
+   run `python demo.py --help` for more details.
 
 
 
