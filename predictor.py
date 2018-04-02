@@ -97,6 +97,7 @@ class PosPrediction():
     def predict(self, image):
         pos = self.sess.run(self.x_op, 
                     feed_dict = {self.x: image[np.newaxis, :,:,:]})
+        pos = np.squeeze(pos)
         return pos*self.MaxPos
 
     def predict_batch(self, images):
