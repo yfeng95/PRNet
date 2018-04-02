@@ -115,7 +115,6 @@ class PRN:
         #print 'net time:', time() - st
 
         # restore 
-        cropped_pos = np.squeeze(cropped_pos)
         cropped_vertices = np.reshape(cropped_pos, [-1, 3]).T
         z = cropped_vertices[2,:].copy()/tform.params[0,0]
         cropped_vertices[2,:] = 1
