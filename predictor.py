@@ -4,7 +4,7 @@ from tensorflow.contrib.framework import arg_scope
 import numpy as np
 
 def resBlock(x, num_outputs, kernel_size = 4, stride=1, activation_fn=tf.nn.relu, normalizer_fn=tcl.batch_norm, scope=None):
-    assert num_outputs%2==0, "num_outputs must be divided by channel_factor %d." % self.channel_factor
+    assert num_outputs%2==0 #num_outputs must be divided by channel_factor(2 here)
     with tf.variable_scope(scope, 'resBlock'):
         shortcut = x
         if stride != 1 or x.get_shape()[3] != num_outputs:
@@ -16,7 +16,6 @@ def resBlock(x, num_outputs, kernel_size = 4, stride=1, activation_fn=tf.nn.relu
 
         x += shortcut       
         x = normalizer_fn(x)
-
         x = activation_fn(x)
     return x
 
