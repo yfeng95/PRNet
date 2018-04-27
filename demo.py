@@ -11,7 +11,7 @@ from api import PRN
 
 
 def main(args):
-    print args.isDlib
+    print(args.isDlib)
 
     if args.isShow:
         args.isOpencv = True
