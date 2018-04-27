@@ -1,3 +1,4 @@
+import cv2
 import numpy as np
 import os
 from skimage.io import imread, imsave
