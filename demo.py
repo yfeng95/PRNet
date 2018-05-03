@@ -22,7 +22,7 @@ def main(args):
 
     # ---- init PRN
     os.environ['CUDA_VISIBLE_DEVICES'] = args.gpu # GPU number, -1 for CPU
-    prn = PRN(is_dlib = args.isDlib) 
+    prn = PRN(is_dlib = args.isDlib)
 
     # ------------- load data
     image_folder = args.inputDir
@@ -37,18 +37,20 @@ def main(args):
     total_num = len(image_path_list)
 
     for i, image_path in enumerate(image_path_list):
-        
+
         name = image_path.strip().split('/')[-1][:-4]
-        
+
         # read image
         image = imread(image_path)
         [h, w, _] = image.shape
 
-        # the core: regress position map    
+        # the core: regress position map
         if args.isDlib:
-            max_size = max(image.shape[0], image.shape[1]) 
+            max_size = max(image.shape[0], image.shape[1])
             if max_size> 1000:
                 image = rescale(image, 1000./max_size)
+                image = image*256
+                image = image.astype(np.uint8)
             pos = prn.process(image) # use dlib to detect face
         else:
             if image.shape[1] == image.shape[2]:
@@ -62,7 +64,7 @@ def main(args):
         if pos is None:
             continue
 
-        if args.is3d or args.isMat or args.isPose or args.isShow:        
+        if args.is3d or args.isMat or args.isPose or args.isShow:
             # 3D vertices
             vertices = prn.get_vertices(pos)
             if args.isFront:
@@ -71,7 +73,7 @@ def main(args):
                 save_vertices = vertices
 
         if args.isImage:
-            imsave(os.path.join(save_folder, name + '.jpg'), image) 
+            imsave(os.path.join(save_folder, name + '.jpg'), image)
 
         if args.is3d:
             # corresponding colors
@@ -88,8 +90,8 @@ def main(args):
                 write_obj(os.path.join(save_folder, name + '.obj'), save_vertices, colors, prn.triangles) #save 3d face(can open with meshlab)
 
         if args.isDepth:
-            depth_image = get_depth_image(vertices, prn.triangles, h, w) 
-            imsave(os.path.join(save_folder, name + '_depth.jpg'), depth_image) 
+            depth_image = get_depth_image(vertices, prn.triangles, h, w)
+            imsave(os.path.join(save_folder, name + '_depth.jpg'), depth_image)
 
         if args.isMat:
             sio.savemat(os.path.join(save_folder, name + '_mesh.mat'), {'vertices': save_vertices, 'colors': colors, 'triangles': prn.triangles})
@@ -97,12 +99,12 @@ def main(args):
         if args.isKpt or args.isShow:
             # get landmarks
             kpt = prn.get_landmarks(pos)
-            np.savetxt(os.path.join(save_folder, name + '_kpt.txt'), kpt) 
-        
+            np.savetxt(os.path.join(save_folder, name + '_kpt.txt'), kpt)
+
         if args.isPose or args.isShow:
             # estimate pose
             camera_matrix, pose = estimate_pose(vertices)
-            np.savetxt(os.path.join(save_folder, name + '_pose.txt'), pose) 
+            np.savetxt(os.path.join(save_folder, name + '_pose.txt'), pose)
 
         if args.isShow:
             # ---------- Plot
@@ -118,34 +120,34 @@ if __name__ == '__main__':
 
     parser.add_argument('-i', '--inputDir', default='TestImages/', type=str,
                         help='path to the input directory, where input images are stored.')
-    parser.add_argument('-o', '--outputDir', default='TestImages/results', type=str, 
+    parser.add_argument('-o', '--outputDir', default='TestImages/results', type=str,
                         help='path to the output directory, where results(obj,txt files) will be stored.')
-    parser.add_argument('--gpu', default='0', type=str, 
+    parser.add_argument('--gpu', default='0', type=str,
                         help='set gpu id, -1 for CPU')
-    parser.add_argument('--isDlib', default=True, type=ast.literal_eval, 
+    parser.add_argument('--isDlib', default=True, type=ast.literal_eval,
                         help='whether to use dlib for detecting face, default is True, if False, the input image should be cropped in advance')
-    parser.add_argument('--is3d', default=True, type=ast.literal_eval, 
+    parser.add_argument('--is3d', default=True, type=ast.literal_eval,
                         help='whether to output 3D face(.obj)')
-    parser.add_argument('--isMat', default=False, type=ast.literal_eval, 
+    parser.add_argument('--isMat', default=False, type=ast.literal_eval,
                         help='whether to save vertices,color,triangles as mat for matlab showing')
-    parser.add_argument('--isKpt', default=False, type=ast.literal_eval,  
+    parser.add_argument('--isKpt', default=False, type=ast.literal_eval,
                         help='whether to output key points(.txt)')
-    parser.add_argument('--isPose', default=False, type=ast.literal_eval,  
+    parser.add_argument('--isPose', default=False, type=ast.literal_eval,
                         help='whether to output estimated pose(.txt)')
-    parser.add_argument('--isShow', default=False, type=ast.literal_eval,  
+    parser.add_argument('--isShow', default=False, type=ast.literal_eval,
                         help='whether to show the results with opencv(need opencv)')
-    parser.add_argument('--isImage', default=False, type=ast.literal_eval, 
+    parser.add_argument('--isImage', default=False, type=ast.literal_eval,
                         help='whether to save input image')
     # update in 2017/4/10
-    parser.add_argument('--isFront', default=False, type=ast.literal_eval, 
+    parser.add_argument('--isFront', default=False, type=ast.literal_eval,
                         help='whether to frontalize vertices(mesh)')
     # update in 2017/4/25
-    parser.add_argument('--isDepth', default=False, type=ast.literal_eval, 
+    parser.add_argument('--isDepth', default=False, type=ast.literal_eval,
                         help='whether to output depth image')
     # update in 2017/4/27
-    parser.add_argument('--isTexture', default=False, type=ast.literal_eval, 
+    parser.add_argument('--isTexture', default=False, type=ast.literal_eval,
                         help='whether to save texture in obj file')
-    parser.add_argument('--isMask', default=False, type=ast.literal_eval, 
+    parser.add_argument('--isMask', default=False, type=ast.literal_eval,
                         help='whether to set invisible pixels(due to self-occlusion) in texture as 0')
 
     main(parser.parse_args())
