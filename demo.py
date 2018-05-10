@@ -57,7 +57,6 @@ def main(args):
             else:
                 box = np.array([0, image.shape[1]-1, 0, image.shape[0]-1]) # cropped with bounding box
                 pos = prn.process(image, box)
-
         image = image/255.
         if pos is None:
             continue
@@ -68,7 +67,8 @@ def main(args):
             if args.isFront:
                 save_vertices = frontalize(vertices)
             else:
-                save_vertices = vertices
+                save_vertices = vertices.copy()
+            save_vertices[:,1] = h - 1 - save_vertices[:,1]
 
         if args.isImage:
             imsave(os.path.join(save_folder, name + '.jpg'), image) 
@@ -103,6 +103,8 @@ def main(args):
             # estimate pose
             camera_matrix, pose = estimate_pose(vertices)
             np.savetxt(os.path.join(save_folder, name + '_pose.txt'), pose) 
+            np.savetxt(os.path.join(save_folder, name + '_camera_matrix.txt'), camera_matrix) 
+
 
         if args.isShow:
             # ---------- Plot
@@ -147,5 +149,7 @@ if __name__ == '__main__':
                         help='whether to save texture in obj file')
     parser.add_argument('--isMask', default=False, type=ast.literal_eval, 
                         help='whether to set invisible pixels(due to self-occlusion) in texture as 0')
-
+    # update in 2017/5/10
+    parser.add_argument('--solution', default=512, type=int, 
+                        help='set the resolution of texture map')
     main(parser.parse_args())
