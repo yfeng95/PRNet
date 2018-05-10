@@ -28,7 +28,7 @@ def write_obj(obj_name, vertices, colors, triangles):
         obj_name = obj_name + '.obj'
         
     # write obj
-    with open(obj_name, 'wb') as f:
+    with open(obj_name, 'w') as f:
         
         # write vertices & colors
         for i in range(vertices.shape[0]):
@@ -39,8 +39,8 @@ def write_obj(obj_name, vertices, colors, triangles):
         # write f: ver ind/ uv ind
         [k, ntri] = triangles.shape
         for i in range(triangles.shape[0]):
-            # s = 'f {}/{} {}/{} {}/{} \n'.format(triangles[i, 0], triangles[i, 0], triangles[i, 1], triangles[i, 1], triangles[i, 2], triangles[i, 2])
-            s = 'f {} {} {}\n'.format(triangles[i, 0], triangles[i, 1], triangles[i, 2])
+            # s = 'f {} {} {}\n'.format(triangles[i, 0], triangles[i, 1], triangles[i, 2])
+            s = 'f {} {} {}\n'.format(triangles[i, 2], triangles[i, 1], triangles[i, 0])
             f.write(s)
 
 
@@ -63,7 +63,7 @@ def write_obj_with_texture(obj_name, vertices, colors, triangles, texture, uv_co
     triangles += 1 # mesh lab start with 1
     
     # write obj
-    with open(obj_name, 'wb') as f:
+    with open(obj_name, 'w') as f:
         # first line: write mtlib(material library)
         s = "mtllib {}\n".format(os.path.abspath(mtl_name))
         f.write(s)
@@ -82,11 +82,12 @@ def write_obj_with_texture(obj_name, vertices, colors, triangles, texture, uv_co
 
         # write f: ver ind/ uv ind
         for i in range(triangles.shape[0]):
-            s = 'f {}/{} {}/{} {}/{}\n'.format(triangles[i,0], triangles[i,0], triangles[i,1], triangles[i,1], triangles[i,2], triangles[i,2])
+            # s = 'f {}/{} {}/{} {}/{}\n'.format(triangles[i,0], triangles[i,0], triangles[i,1], triangles[i,1], triangles[i,2], triangles[i,2])
+            s = 'f {}/{} {}/{} {}/{}\n'.format(triangles[i,2], triangles[i,2], triangles[i,1], triangles[i,1], triangles[i,0], triangles[i,0])
             f.write(s)
 
     # write mtl
-    with open(mtl_name, 'wb') as f:
+    with open(mtl_name, 'w') as f:
         f.write("newmtl FaceTexture\n")
         s = 'map_Kd {}\n'.format(os.path.abspath(texture_name)) # map to image
         f.write(s)
