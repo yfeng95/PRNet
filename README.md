@@ -20,7 +20,7 @@ The main features are:
 
 * **Robust** Tested on facial images in unconstrained conditions.  Our method is robust to poses, illuminations and occlusions. 
 
-  ​
+  
 
 ## Applications
 
@@ -30,11 +30,20 @@ The main features are:
 
 Dense alignment of both visible and non-visible points(including 68 key points). 
 
+And the **visibility** of  points(1 for visible and 0 for non-visible).
+
 ![alignment](Docs/images/alignment.jpg)
 
 * #### 3D Face Reconstruction
 
 Get the 3D vertices and corresponding colours from a single image.  Save the result as mesh data(.obj), which can be opened with [Meshlab](http://www.meshlab.net/) or Microsoft [3D Builder](https://developer.microsoft.com/en-us/windows/hardware/3d-print/3d-builder-resources). Notice that, the texture of non-visible area is distorted due to self-occlusion.
+
+**New**: 
+
+1. you can choose to output mesh with its original pose(default) or with front view(which means all output meshes are aligned)
+2. obj file can now also written with texture map, and you can set non-visible texture to 0. 
+
+
 
 ![alignment](Docs/images/reconstruct.jpg)
 
@@ -48,7 +57,25 @@ Get the 3D vertices and corresponding colours from a single image.  Save the res
 
   #### ![pose](Docs/images/pose.jpg)
 
-* #### Texture Fusion
+* #### Depth image
+
+  ![pose](Docs/images/depth.jpg)
+
+* #### Texture Editing
+
+  * Data Augmentation/Selfie Editing
+
+    modify special parts of input face, eyes for example:
+
+    ![pose](Docs/images/eye.jpg)
+
+  * Face Swapping
+
+    replace the texture with another, then warp it to original pose and use Poisson editing to blend images.
+
+    ![pose](Docs/images/swapping.jpg)
+
+    
 
 
 
@@ -90,11 +117,27 @@ cd PRNet
 
    run `python demo.py --help` for more details.
 
+5. For Texture Editing Apps:
+
+   `python demo_texture.py -i image_path_1 -r image_path_2 -o output_path   `
+
+   run `python demo_texture.py --help` for more details.
+
+
+
+## Changelog
+
+* 2018/5/10 add texture editing examples(for data augmentation, face swapping)
+* 2018/4/28 add visibility of vertices, output obj file with texture map, depth image
+* 2018/4/26 can output mesh with front view
+* 2018/3/28 add pose estimation
+* 2018/3/12  first release(3d reconstruction and dense alignment)
+
 
 
 ## Contacts
 
-Please contact <a href="fengyao@sjtu.edu.cn">Yao Feng</a> or open an issue for any questions or suggestions(like, push me to add more applications).
+Please contact _fengyao@sjtu.edu.cn_  or open an issue for any questions or suggestions(like, push me to add more applications).
 
 Thanks! (●'◡'●)
 
