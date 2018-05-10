@@ -82,11 +82,11 @@ def get_point_weight(point, tri_points):
     return w0, w1, w2
 
 
-def render_texture(vertices, texture, triangles, h, w, c = 3):
+def render_texture(vertices, colors, triangles, h, w, c = 3):
     ''' render mesh by z buffer
     Args:
         vertices: 3 x nver
-        texture: 3 x nver
+        colors: 3 x nver
         triangles: 3 x ntri
         h: height
         w: width    
@@ -97,7 +97,7 @@ def render_texture(vertices, texture, triangles, h, w, c = 3):
     depth_buffer = np.zeros([h, w]) - 999999.
     # triangle depth: approximate the depth to the average value of z in each vertex(v0, v1, v2), since the vertices are closed to each other
     tri_depth = (vertices[2, triangles[0,:]] + vertices[2,triangles[1,:]] + vertices[2, triangles[2,:]])/3. 
-    tri_tex = (texture[:, triangles[0,:]] + texture[:,triangles[1,:]] + texture[:, triangles[2,:]])/3.
+    tri_tex = (colors[:, triangles[0,:]] + colors[:,triangles[1,:]] + colors[:, triangles[2,:]])/3.
 
     for i in range(triangles.shape[1]):
         tri = triangles[:, i] # 3 vertex indices
