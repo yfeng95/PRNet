@@ -341,13 +341,13 @@ def vis_of_vertices(vertices, triangles, h, w, depth_buffer = None):
 
     return vertices_vis
 
-## To be modified
+# TODO: To be modified
 def triangle_buffer(vertices, triangles, h, w):
     '''
     Args:
         vertices: 3 x nver
         triangles: 3 x ntri
-        h: height
+        h: height  # [h, w, _] = image.shape
         w: width
     Returns:
         depth_buffer: height x width
@@ -358,9 +358,6 @@ def triangle_buffer(vertices, triangles, h, w):
     # Each triangle has 3 vertices & Each vertex has 3 coordinates x, y, z.
     # Here, the bigger the z, the fronter the point.
     '''
-    # initial 
-    [h, w, _] = image.shape
-
     depth_buffer = np.zeros([h, w]) + 999999. #+ np.min(vertices[2,:]) - 999999. # set the initial z to the farest position
     triangle_buffer = np.zeros_like(depth_buffer, dtype = np.int32) - 1 # if -1, the pixel has no triangle correspondance
 
