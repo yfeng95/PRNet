@@ -148,10 +148,23 @@ class PRN:
         Returns:
             vertices: the vertices(point cloud). shape = (num of points, 3). n is about 40K here.
         '''
-        all_vertices = np.reshape(pos, [self.resolution_op**2, -1]);
+        all_vertices = np.reshape(pos, [self.resolution_op**2, -1])
         vertices = all_vertices[self.face_ind, :]
 
         return vertices
+
+    def get_colors_from_texture(self, texture):
+        '''
+        Args:
+            texture: the texture map. shape = (256, 256, 3).
+        Returns:
+            colors: the corresponding colors of vertices. shape = (num of points, 3). n is 45128 here.
+        '''
+        all_colors = np.reshape(texture, [self.resolution_op**2, -1])
+        colors = all_colors[self.face_ind, :]
+
+        return colors
+
 
     def get_colors(self, image, vertices):
         '''
