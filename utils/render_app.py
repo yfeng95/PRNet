@@ -1,5 +1,5 @@
 import numpy as np
-from render import vis_of_vertices, render_texture
+from utils.render import vis_of_vertices, render_texture
 from scipy import ndimage
 
 def get_visibility(vertices, triangles, h, w):
