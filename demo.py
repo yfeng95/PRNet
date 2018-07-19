@@ -13,7 +13,7 @@ from api import PRN
 from utils.estimate_pose import estimate_pose
 from utils.rotate_vertices import frontalize
 from utils.render_app import get_visibility, get_uv_mask, get_depth_image
-from utils.write import write_obj, write_obj_with_texture
+from utils.write import write_obj_with_colors, write_obj_with_texture
 
 def main(args):
     if args.isShow or args.isTexture:
@@ -42,7 +42,9 @@ def main(args):
 
         # read image
         image = imread(image_path)
-        [h, w, _] = image.shape
+        [h, w, c] = image.shape
+        if c>3:
+            image = image[:,:,:3]
 
         # the core: regress position map
         if args.isDlib:
@@ -80,14 +82,19 @@ def main(args):
             colors = prn.get_colors(image, vertices)
 
             if args.isTexture:
-                texture = cv2.remap(image, pos[:,:,:2].astype(np.float32), None, interpolation=cv2.INTER_NEAREST, borderMode=cv2.BORDER_CONSTANT,borderValue=(0))
+                if args.texture_size != 256:
+                    pos_interpolated = resize(pos, (args.texture_size, args.texture_size), preserve_range = True)
+                else:
+                    pos_interpolated = pos.copy()
+                texture = cv2.remap(image, pos_interpolated[:,:,:2].astype(np.float32), None, interpolation=cv2.INTER_LINEAR, borderMode=cv2.BORDER_CONSTANT,borderValue=(0))
                 if args.isMask:
                     vertices_vis = get_visibility(vertices, prn.triangles, h, w)
                     uv_mask = get_uv_mask(vertices_vis, prn.triangles, prn.uv_coords, h, w, prn.resolution_op)
+                    uv_mask = resize(uv_mask, (args.texture_size, args.texture_size), preserve_range = True)
                     texture = texture*uv_mask[:,:,np.newaxis]
-                write_obj_with_texture(os.path.join(save_folder, name + '.obj'), save_vertices, colors, prn.triangles, texture, prn.uv_coords/prn.resolution_op)#save 3d face with texture(can open with meshlab)
+                write_obj_with_texture(os.path.join(save_folder, name + '.obj'), save_vertices, prn.triangles, texture, prn.uv_coords/prn.resolution_op)#save 3d face with texture(can open with meshlab)
             else:
-                write_obj(os.path.join(save_folder, name + '.obj'), save_vertices, colors, prn.triangles) #save 3d face(can open with meshlab)
+                write_obj_with_colors(os.path.join(save_folder, name + '.obj'), save_vertices, prn.triangles, colors) #save 3d face(can open with meshlab)
 
         if args.isDepth:
             depth_image = get_depth_image(vertices, prn.triangles, h, w, True)
@@ -132,7 +139,7 @@ if __name__ == '__main__':
     parser.add_argument('--isDlib', default=True, type=ast.literal_eval,
                         help='whether to use dlib for detecting face, default is True, if False, the input image should be cropped in advance')
     parser.add_argument('--is3d', default=True, type=ast.literal_eval,
-                        help='whether to output 3D face(.obj)')
+                        help='whether to output 3D face(.obj). default save colors.')
     parser.add_argument('--isMat', default=False, type=ast.literal_eval,
                         help='whether to save vertices,color,triangles as mat for matlab showing')
     parser.add_argument('--isKpt', default=False, type=ast.literal_eval,
@@ -154,5 +161,7 @@ if __name__ == '__main__':
                         help='whether to save texture in obj file')
     parser.add_argument('--isMask', default=False, type=ast.literal_eval,
                         help='whether to set invisible pixels(due to self-occlusion) in texture as 0')
-   
+    # update in 2017/7/19
+    parser.add_argument('--texture_size', default=256, type=int,
+                        help='size of texture map, default is 256. need isTexture is True')
     main(parser.parse_args())

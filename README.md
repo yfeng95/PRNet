@@ -6,7 +6,7 @@
 
 
 
-This is an official python implementation of PRN.  The training code will be released(about two months later).
+This is an official python implementation of PRN. 
 
 PRN is a method to jointly regress dense alignment and 3D face shape in an end-to-end manner. More examples on Multi-PIE and 300VW can be seen in [YouTube](https://youtu.be/tXTgLSyIha8) .
 
@@ -41,7 +41,7 @@ Get the 3D vertices and corresponding colours from a single image.  Save the res
 **New**: 
 
 1. you can choose to output mesh with its original pose(default) or with front view(which means all output meshes are aligned)
-2. obj file can now also written with texture map, and you can set non-visible texture to 0. 
+2. obj file can now also written with texture map(with specified texture size), and you can set non-visible texture to 0. 
 
 
 
@@ -125,13 +125,86 @@ cd PRNet
 
 
 
+## Training
+
+The core idea of the paper is:
+
+Using position map to represent face geometry&alignment information, then learning this with an Encoder-Decoder Network.
+
+So, the training steps:
+
+1. generate position map ground truth.
+
+   the example of generating position map of 300W_LP dataset can be seen in [generate_posmap_300WLP](https://github.com/YadiraF/face3d/blob/master/examples/8_generate_posmap_300WLP.py)
+
+2. an encoder-decoder network to learn mapping from rgb image to position map.
+
+   the weight mask can be found in the folder `Data/uv-data`
+
+What you can custom:
+
+1. the UV space of position map.
+
+   you can change the parameterization method, or change the resolution of UV space.
+
+2. the backbone of encoder-decoder network
+
+   this demo uses residual blocks. VGG, mobile-net are also ok.
+
+3. the weight mask
+
+   you can change the weight to focus more on which part your project need more.
+
+4. the training data
+
+   if you have scanned 3d face, it's better to train PRN with your own data. Before that, you may need use ICP to align your face meshes.
+
+
+
+## Q&A
+
+1. How to **speed up**?
+
+   a. network inference part
+
+   you can train a smaller network or use a smaller position map as input.
+
+   b. render part
+
+   you can refer to  [c++ version](https://github.com/YadiraF/face3d/blob/master/face3d/mesh_cython/render.py). 
+
+   c. other parts like detecting face, writing obj
+
+   the best way is to rewrite them in c++.
+
+2. How to improve the **precision**?
+
+   a. geometry precision.
+
+   Due to the restriction of training data, the precision of reconstructed face from this demo has little detail. You can train the network with your own detailed data or do post-processing like shape-from-shading to add details.
+
+   b. texture precision.
+
+   I just added an option to specify the texture size. When the texture size > face size in original image, and render new facial image with [texture mapping](https://github.com/YadiraF/face3d/blob/04869dcee1455d1fa5b157f165a6878c550cf695/face3d/mesh/render.py#L217), there will be little resample error.
+
+   
+
 ## Changelog
 
+* 2018/7/19 add training part. can specify the resolution of the texture map.
 * 2018/5/10 add texture editing examples(for data augmentation, face swapping)
 * 2018/4/28 add visibility of vertices, output obj file with texture map, depth image
 * 2018/4/26 can output mesh with front view
 * 2018/3/28 add pose estimation
 * 2018/3/12  first release(3d reconstruction and dense alignment)
+
+
+
+## License
+
+Code: under MIT license.
+
+Trained model file: please see [issue 28](https://github.com/YadiraF/PRNet/issues/28), thank [Kyle McDonald](https://github.com/kylemcdonald) for his answer.
 
 
 

@@ -6,7 +6,7 @@ from skimage.io import imread, imsave
 from time import time
 
 from api import PRN
-from utils.write import write_obj
+from utils.write import write_obj_with_colors
 
 # ---- init PRN
 os.environ['CUDA_VISIBLE_DEVICES'] = '0' # GPU number, -1 for CPU
@@ -49,6 +49,6 @@ for i, image_path in enumerate(image_path_list):
     # -- save
     name = image_path.strip().split('/')[-1][:-4]
     np.savetxt(os.path.join(save_folder, name + '.txt'), kpt) 
-    write_obj(os.path.join(save_folder, name + '.obj'), vertices, colors, prn.triangles) #save 3d face(can open with meshlab)
+    write_obj_with_colors(os.path.join(save_folder, name + '.obj'), vertices, prn.triangles, colors) #save 3d face(can open with meshlab)
 
     sio.savemat(os.path.join(save_folder, name + '_mesh.mat'), {'vertices': vertices, 'colors': colors, 'triangles': prn.triangles})
