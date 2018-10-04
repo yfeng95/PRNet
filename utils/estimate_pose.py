@@ -74,7 +74,7 @@ def compute_similarity_transform(points_static, points_to_transform):
     p1c = p1+t1
 
     covariance_matrix = p0c.dot(p1c.T)
-    U,S,V = np.linalg.svd(coveriance_matrix)
+    U,S,V = np.linalg.svd(covariance_matrix)
     R = U.dot(V)
     if np.linalg.det(R) < 0:
         R[:,2] *= -1
