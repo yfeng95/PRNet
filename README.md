@@ -161,7 +161,7 @@ What you can custom:
 
 
 
-## Q&A
+## FQA
 
 1. How to **speed up**?
 
@@ -171,7 +171,7 @@ What you can custom:
 
    b. render part
 
-   you can refer to  [c++ version](https://github.com/YadiraF/face3d/blob/master/face3d/mesh_cython/render.py). 
+   you can refer to  [c++ version](https://github.com/YadiraF/face3d/blob/master/face3d/mesh/render.py). 
 
    c. other parts like detecting face, writing obj
 
@@ -185,7 +185,7 @@ What you can custom:
 
    b. texture precision.
 
-   I just added an option to specify the texture size. When the texture size > face size in original image, and render new facial image with [texture mapping](https://github.com/YadiraF/face3d/blob/04869dcee1455d1fa5b157f165a6878c550cf695/face3d/mesh/render.py#L217), there will be little resample error.
+   I just added an option to specify the texture size. When the texture size > face size in original image, and render new facial image with [texture mapping](https://github.com/YadiraF/face3d/blob/04869dcee1455d1fa5b157f165a6878c550cf695/face3d/mesh/render.py), there will be little resample error.
 
    
 
@@ -208,9 +208,24 @@ Trained model file: please see [issue 28](https://github.com/YadiraF/PRNet/issue
 
 
 
+## Citation
+
+If you use this code, please consider citing:
+
+```
+@inProceedings{feng2018prn,
+  title     = {Joint 3D Face Reconstruction and Dense Alignment with Position Map Regression Network},
+  author    = {Yao Feng and Fan Wu and Xiaohu Shao and Yanfeng Wang and Xi Zhou},
+  booktitle = {ECCV},
+  year      = {2018}
+}
+```
+
+
+
 ## Contacts
 
-Please contact _fengyao@sjtu.edu.cn_  or open an issue for any questions or suggestions(like, push me to add more applications).
+Please contact _fengyao@sjtu.edu.cn_  or open an issue for any questions or suggestions.
 
 Thanks! (●'◡'●)
 
