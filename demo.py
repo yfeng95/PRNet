@@ -54,7 +54,7 @@ def main(args):
                 image = (image*255).astype(np.uint8)
             pos = prn.process(image) # use dlib to detect face
         else:
-            if image.shape[1] == image.shape[2]:
+            if image.shape[0] == image.shape[1]:
                 image = resize(image, (256,256))
                 pos = prn.net_forward(image/255.) # input image has been cropped to 256x256
             else:
