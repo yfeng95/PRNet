@@ -68,7 +68,6 @@ def main(args):
                 # Normalizing the frame and skiping if there was no one in the frame
                 frame = frame/255.
                 if pos is None:
-                    cv2.imshow('sparse alignment', frame)
                     continue
                 # Get landmarks in frame
                 kpt = prn.get_landmarks(pos)
