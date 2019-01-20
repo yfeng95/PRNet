@@ -10,11 +10,13 @@ hat_y=(y-min_y)/(max_y-min_y)
 ## 1. Generate groundtruth position map using [generate_posmap_300WLP](https://github.com/YadiraF/face3d/blob/master/examples/8_generate_posmap_300WLP.py)
 ## 2. Generate trainDataLabel.txt file whos format is 
 ``
+
 Root/img1.jpg Root/img1.npy
 
 Root/img2.jpg Root/img2.npy
 
 Root/img3.jpg Root/img3.npy
+
 ``
 
 ## 3. Begining traing
