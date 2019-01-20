@@ -1,4 +1,4 @@
-# Traing PRNet net
+# Traing PRNet
 ### I upload train.py.But this is my fisrt training model using tensorflow by myself. I don't use learning rate decay. I normalize label by equation
 ``
 hat_y=(y-min_y)/(max_y-min_y)
