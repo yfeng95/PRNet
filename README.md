@@ -1,7 +1,7 @@
 # Traing PRNet net
 ### I upload train.py.But this is my fisrt training model using tensorflow by myself. I don't use learning rate decay. I normalize label by equation
 ``
-hat_y=(y-min_y)/(max_y-min_y)\n
+hat_y=(y-min_y)/(max_y-min_y)
 ``
 ### Someone can improve it based on my implementation. I will go on update it if I have time.
 
@@ -10,9 +10,11 @@ hat_y=(y-min_y)/(max_y-min_y)\n
 ## 1. Generate groundtruth position map using [generate_posmap_300WLP](https://github.com/YadiraF/face3d/blob/master/examples/8_generate_posmap_300WLP.py)
 ## 2. Generate trainDataLabel.txt file whos format is 
 ``
-Root/img1.jpg Root/img1.npy\n
-Root/img2.jpg Root/img2.npy\n
-Root/img3.jpg Root/img3.npy\n
+Root/img1.jpg Root/img1.npy
+
+Root/img2.jpg Root/img2.npy
+
+Root/img3.jpg Root/img3.npy
 ``
 
 ## 3. Begining traing
