@@ -26,7 +26,7 @@ data = data / 256 / 1.1
 
 ### 1、Generate train set
 
-a、Downloading 300W-LP.zip、BFM.mat and BFM_UV.mat from [Baiduyun](https://pan.baidu.com/s/1uUZETcKy08eDXs08fUPTDA) passcode:``94cb``
+a、Downloading 300W-LP.zip、BFM.mat and BFM_UV.mat from [Baiduyun](https://pan.baidu.com/s/1uUZETcKy08eDXs08fUPTDA) password:``94cb``
 
 b、Puting BFM.mat and BFM_UV.mat to 
 
