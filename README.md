@@ -1,19 +1,25 @@
 # Todo
 
 1、Data augmentation.
+
 2、Generate myself train set. I have know how to do it but not testing！
+
 3、Training Light weight net and convert to caffe&caffe2 using C++.
 
 # Update
 
 1、``2019-12-1:`` Add loss weights image 
+
 <p align="center"> 
 <img src="Data\uv-data\weight_mask_final.jpg">
 </p>
- and modify image & label(possion_map) normalize method to
+
+ and modify image & label(possion_map) normalize method 
+ 
 ``
 data = data / 256 / 1.1
 ``
+
 2、``2019-4-1:`` Upload train.py
 
 # Traing PRNet
