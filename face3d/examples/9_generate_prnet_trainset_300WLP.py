@@ -160,11 +160,12 @@ def generate_prnet_trainset(root_300wlp, save_trainset):
                 continue
 
             run_posmap_300W_LP(bfm, img_path, mat_path, save_folder)
+            print(save_img_path)
             fp_label.writelines(save_img_path + ' ' + save_npy_path + '\n')
     fp_label.close()
 
 
 if __name__ == '__main__':
-    root_300wlp = './Data/300W-LP'  # Maybe you should change it about you path
+    root_300wlp = './Data/300W_LP'  # Maybe you should change it about you path
     save_trainset = './Data/trainData'  # Maybe you should change it about you path
     generate_prnet_trainset(root_300wlp, save_trainset)
