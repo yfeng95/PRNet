@@ -46,11 +46,12 @@ python3 9_generate_prnet_trainset_300WLP.py # May be you should modify it about 
 ```
 
 c、Finally, you can get `trainDataLabel.txt` in `face3d\examples`, whos format is 
-``
+
+```
 Root/img1.jpg Root/img1.npy
 Root/img2.jpg Root/img2.npy
 Root/img3.jpg Root/img3.npy
-``
+```
 
 ### 2. Begining traing
 ```python
