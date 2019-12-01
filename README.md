@@ -36,7 +36,7 @@ and puting 300W-LP.zip to
 
 ``face3d/examples/Data``
 
-add unzip it. Then you should
+and unzip it. Then you should
 
 ```python
 cd face3d/face3d/mesh/cython/
