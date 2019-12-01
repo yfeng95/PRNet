@@ -45,7 +45,7 @@ cd face3d/examples
 python3 9_generate_prnet_trainset_300WLP.py # Maybe you should modify it about yourself
 ```
 
-c、Finally, you can get `trainDataLabel.txt` in `face3d\examples`, whos format is 
+c、Finally, you can get `trainDataLabel.txt` in `face3d/examples`, whos format is 
 
 ```
 Root/img1.jpg Root/img1.npy
