@@ -1,9 +1,11 @@
 # Todo
+
 1、Data augmentation.
 2、Generate myself train set. I have know how to do it but not testing！
 3、Training Light weight net and convert to caffe&caffe2 using C++.
 
 # Update
+
 1、``2019-12-1:`` Add loss weights image 
 <p align="center"> 
 <img src="Data\uv-data\weight_mask_final.jpg">
@@ -15,20 +17,28 @@ data = data / 256 / 1.1
 2、``2019-4-1:`` Upload train.py
 
 # Traing PRNet
+
 ### 1、Generate train set
+
 a、Downloading 300W-LP.zip、BFM.mat and BFM_UV.mat from [Baiduyun](https://pan.baidu.com/s/1uUZETcKy08eDXs08fUPTDA) passcode:``94cb``
+
 b、Puting BFM.mat and BFM_UV.mat to 
+
 ``face3d/examples/Data/BFM/Out``
+
 and puting 300W-LP.zip to 
+
 ``face3d/examples/Data``
 
 add unzip it. Then you should
+
 ```python
 cd face3d/face3d/mesh/cython/
 python3 setup build_ext -i
 cd face3d/examples
 python3 9_generate_prnet_trainset_300WLP.py # May be you should modify it about yourself
 ```
+
 c、Finally, you can get `trainDataLabel.txt` in `face3d\examples`, whos format is 
 ``
 Root/img1.jpg Root/img1.npy
