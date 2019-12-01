@@ -34,7 +34,7 @@ class TrainData(object):
             img = cv2.imread(item[0])
             label = np.load(item[1])
 
-            im_array = np.array(img, dtype=np.float32)
+            img_array = np.array(img, dtype=np.float32)
             # imgs.append(img_array/255.0)
             imgs.append(img_array / 256.0 / 1.1)
 
@@ -125,8 +125,8 @@ def main(args):
     save_path = model_path
 
     # Begining train
-    for epoch in xrange(begin_epoch, epochs):
-        for _ in xrange(int(math.ceil(1.0 * data.num_data / batch_size))):
+    for epoch in range(begin_epoch, epochs):
+        for iters in range(int(math.ceil(1.0 * data.num_data / batch_size))):
             batch = data(batch_size)
             loss_res, _, global_step_res, learning_rate_res = sess.run(
                 [loss, train_step, global_step, learning_rate], feed_dict={x: batch[0], label: batch[1]})
