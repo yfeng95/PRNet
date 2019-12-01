@@ -103,7 +103,7 @@ def main(args):
     x_op = net(x, is_training=True)
 
     # Loss
-    weights = c2.imread("Data/uv-data/weight_mask_final.jpg")  # [256, 256, 3]
+    weights = cv2.imread("Data/uv-data/weight_mask_final.jpg")  # [256, 256, 3]
     weights_data = np.zeros([1, 256, 256, 3], dtype=np.float32)
     weights_data[0, :, :, :] = weights / 16.0
     loss = tf.losses.mean_squared_error(label, x_op, weights_data)
