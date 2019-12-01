@@ -105,7 +105,7 @@ def main(args):
     # Loss
     weights = c2.imread("Data/uv-data/weight_mask_final.jpg")  # [256, 256, 3]
     weights_data = np.zeros([1, 256, 256, 3], dtype=np.float32)
-    weights_data[0, :, :, :] = weights * 16.0
+    weights_data[0, :, :, :] = weights / 16.0
     loss = tf.losses.mean_squared_error(label, x_op, weights_data)
 
     # This is for batch norm layer
