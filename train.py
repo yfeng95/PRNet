@@ -140,9 +140,9 @@ if __name__ == '__main__':
 
     par = argparse.ArgumentParser(description='Joint 3D Face Reconstruction and Dense Alignment with Position Map Regression Network')
 
-    par.add_argument('--train_data_file', default='Data/trainData/trainDataLabel.txt', type=str, help='The training data file')
+    par.add_argument('--train_data_file', default='face3d/examples/trainDataLabel.txt', type=str, help='The training data file')
     par.add_argument('--learning_rate', default=0.0001, type=float, help='The learning rate')
-    par.add_argument('--epochs', default=200, type=int, help='Total epochs')
+    par.add_argument('--epochs', default=100, type=int, help='Total epochs')
     par.add_argument('--batch_size', default=16, type=int, help='Batch sizes')
     par.add_argument('--checkpoint', default='checkpoint/', type=str, help='The path of checkpoint')
     par.add_argument('--model_path', default='checkpoint/256_256_resfcn256_weight', type=str, help='The path of pretrained model')

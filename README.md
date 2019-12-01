@@ -1,27 +1,45 @@
+# Todo
+1、Data augmentation.
+2、Generate myself train set. I have know how to do it but not testing！
+3、Training Light weight net and convert to caffe&caffe2 using C++.
+
+# Update
+1、``2019-12-1:`` Add loss weights image 
+<p align="center"> 
+<img src="Data\uv-data\weight_mask_final.jpg">
+</p>
+ and modify image & label(possion_map) normalize method to
+``
+data = data / 256 / 1.1
+``
+2、``2019-4-1:`` Upload train.py
+
 # Traing PRNet
-### I upload train.py.But this is my fisrt training model using tensorflow by myself. I don't use learning rate decay. I normalize label by equation
+### 1、Generate train set
+a、Downloading 300W-LP.zip、BFM.mat and BFM_UV.mat from [Baiduyun](https://pan.baidu.com/s/1uUZETcKy08eDXs08fUPTDA) passcode:``94cb``
+b、Puting BFM.mat and BFM_UV.mat to 
+``face3d\examples\Data\BFM\Out``
+and puting 300W-LP.zip to 
+``face3d\examples\Data``
+
+add unzip it. Then you should
+```python
+cd face3d\examples
+python3 9_generate_prnet_trainset_300WLP.py # May be you should modify it about yourself
+```
+c、Finally, you can get `trainDataLabel.txt` in `face3d\examples`, whos format is 
 ``
-hat_y=(y-min_y)/(max_y-min_y)
-``
-### Someone can improve it based on my implementation. I will go on update it if I have time.
-
-## ------------------------------------------------------------------
-
-## 1. Generate groundtruth position map using [generate_posmap_300WLP](https://github.com/YadiraF/face3d/blob/master/examples/8_generate_posmap_300WLP.py)
-## 2. Generate trainDataLabel.txt file whos format is 
-
 Root/img1.jpg Root/img1.npy
-
 Root/img2.jpg Root/img2.npy
-
 Root/img3.jpg Root/img3.npy
-
-## 3. Begining traing
-``
-python train.py
 ``
 
+### 2. Begining traing
+```python
+python3 train.py
+```
 
+--------------------------------------------------------------------------------------------------------------
 
 # Joint 3D Face Reconstruction and Dense Alignment with Position Map Regression Network
 
