@@ -15,7 +15,7 @@
 </p>
 
  and modify image & label(possion_map) normalize method 
- 
+
 ``
 data = data / 256 / 1.1
 ``
@@ -42,7 +42,7 @@ and unzip it. Then you should
 cd face3d/face3d/mesh/cython/
 python3 setup build_ext -i
 cd face3d/examples
-python3 9_generate_prnet_trainset_300WLP.py # May be you should modify it about yourself
+python3 9_generate_prnet_trainset_300WLP.py # Maybe you should modify it about yourself
 ```
 
 c、Finally, you can get `trainDataLabel.txt` in `face3d\examples`, whos format is 
@@ -57,7 +57,6 @@ Root/img3.jpg Root/img3.npy
 ```python
 python3 train.py
 ```
-
 
 --------------------------------------------------------------------------------------------------------------
 
