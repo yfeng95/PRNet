@@ -4,7 +4,7 @@
 
 2、Generate myself train set. I have know how to do it but not testing！
 
-3、Training Light weight net and convert to caffe&caffe2 using C++.
+3、Training Light weight net and convert to caffe or caffe2 and inference using C++.
 
 # Update
 
