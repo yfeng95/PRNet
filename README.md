@@ -18,13 +18,15 @@ data = data / 256 / 1.1
 ### 1、Generate train set
 a、Downloading 300W-LP.zip、BFM.mat and BFM_UV.mat from [Baiduyun](https://pan.baidu.com/s/1uUZETcKy08eDXs08fUPTDA) passcode:``94cb``
 b、Puting BFM.mat and BFM_UV.mat to 
-``face3d\examples\Data\BFM\Out``
+``face3d/examples/Data/BFM/Out``
 and puting 300W-LP.zip to 
-``face3d\examples\Data``
+``face3d/examples/Data``
 
 add unzip it. Then you should
 ```python
-cd face3d\examples
+cd face3d/face3d/mesh/cython/
+python3 setup build_ext -i
+cd face3d/examples
 python3 9_generate_prnet_trainset_300WLP.py # May be you should modify it about yourself
 ```
 c、Finally, you can get `trainDataLabel.txt` in `face3d\examples`, whos format is 
