@@ -166,6 +166,6 @@ def generate_prnet_trainset(root_300wlp, save_trainset):
 
 
 if __name__ == '__main__':
-    root_300wlp = './Data/300W_LP/All_Rotate'  # Maybe you should change it about you path
-    save_trainset = './Data/trainData_rotate'  # Maybe you should change it about you path
+    root_300wlp = './Data/300W_LP'  # Maybe you should change it about you path
+    save_trainset = './Data/trainData'  # Maybe you should change it about you path
     generate_prnet_trainset(root_300wlp, save_trainset)
