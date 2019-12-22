@@ -138,7 +138,7 @@ def generate_prnet_trainset(root_300wlp, save_trainset):
     bfm = MorphabelModel('Data/BFM/Out/BFM.mat')
 
     # run
-    fp_label = open('trainDataLabel_rotate.txt', "w")
+    fp_label = open('trainDataLabel.txt', "w")
     sub_dir_list = os.listdir(root_300wlp)
     for item in sub_dir_list:
         save_folder = os.path.join(save_trainset, item)
