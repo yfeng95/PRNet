@@ -1,14 +1,38 @@
 # Todo
 
-1、Data augmentation.
+*  Data augmentation
 
-2、Generate myself train set. I have know how to do it but not testing！
+* Generate myself train set. I have know how to do it but not testing
 
-3、Training Light weight net and convert to caffe or caffe2 and inference using C++.
+* Training Light weight net and convert to caffe or caffe2 and inference using C++
 
 # Update
+* ``2019-12-20:`` Data augmentation -- Rotate angle 15, 30, 45, 60, -15, -30, -45, -60. For example:
 
-1、``2019-12-1:`` Add loss weights image 
+    - Original Image
+
+ <p align="center"> 
+<img src="face3d/examples/DataRotate/AFW_1051618982_1_0.jpg" width="96" height="96">
+</p>
+
+    - Original Image
+ <p align="center"> 
+<img src="face3d/examples/DataRotate/AFW_1051618982_1_0_angle_15.jpg" width="96" height="96">
+<img src="face3d/examples/DataRotate/AFW_1051618982_1_0_angle_30.jpg" width="96" height="96">
+<img src="face3d/examples/DataRotate/AFW_1051618982_1_0_angle_45.jpg" width="96" height="96">
+<img src="face3d/examples/DataRotate/AFW_1051618982_1_0_angle_60.jpg" width="96" height="96">
+</p>
+
+    - Rotate angle 15, 30, 45, 60
+
+ <p align="center"> 
+<img src="face3d/examples/DataRotate/AFW_1051618982_1_0_angle_-15.jpg" width="96" height="96">
+<img src="face3d/examples/DataRotate/AFW_1051618982_1_0_angle_-30.jpg" width="96" height="96">
+<img src="face3d/examples/DataRotate/AFW_1051618982_1_0_angle_-45.jpg" width="96" height="96">
+<img src="face3d/examples/DataRotate/AFW_1051618982_1_0_angle_-60.jpg" width="96" height="96">
+</p>
+
+* ``2019-12-1:`` Add loss weights image 
 
 <p align="center"> 
 <img src="Data\uv-data\weight_mask_final.jpg">
@@ -20,15 +44,15 @@
 data = data / 256 / 1.1
 ``
 
-2、``2019-4-1:`` Upload train.py
+* ``2019-4-1:`` Upload train.py
 
 # Traing PRNet
 
 ### 1、Generate train set
 
-a、Downloading 300W-LP.zip、BFM.mat and BFM_UV.mat from [Baiduyun](https://pan.baidu.com/s/1uUZETcKy08eDXs08fUPTDA) password:``94cb``
+* Downloading 300W-LP.zip、BFM.mat and BFM_UV.mat from [Baiduyun](https://pan.baidu.com/s/1uUZETcKy08eDXs08fUPTDA) password:``94cb``
 
-b、Puting BFM.mat and BFM_UV.mat to 
+* Puting BFM.mat and BFM_UV.mat to 
 
 ``face3d/examples/Data/BFM/Out``
 
@@ -45,7 +69,7 @@ cd face3d/examples
 python3 9_generate_prnet_trainset_300WLP.py # Maybe you should modify it about yourself
 ```
 
-c、Finally, you can get `trainDataLabel.txt` in `face3d/examples`, whos format is 
+* Finally, you can get `trainDataLabel.txt` in `face3d/examples`, whos format is 
 
 ```
 Root/img1.jpg Root/img1.npy
