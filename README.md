@@ -1,21 +1,24 @@
 # Todo
 
-*  Data augmentation
-
 * Generate myself train set. I have know how to do it but not testing
 
 * Training Light weight net and convert to caffe or caffe2 and inference using C++
 
 # Update
-* ``2019-12-20:`` Data augmentation -- Rotate angle 15, 30, 45, 60, -15, -30, -45, -60. For example:
+* ``2019-12-20:`` Data augmentation -- I rotate 300W-LP.zip with angle 15, 30, 45, 60, -15, -30, -45, -60 and get **300W-LP-Rotate.tar.gz**. Some samples is following:
 
-    - Original Image
+```
+1. Original Image
+```
 
  <p align="center"> 
 <img src="face3d/examples/DataRotate/AFW_1051618982_1_0.jpg" width="96" height="96">
 </p>
 
-    - Original Image
+```
+2. Rotate angle 15, 30, 45, 60
+```
+
  <p align="center"> 
 <img src="face3d/examples/DataRotate/AFW_1051618982_1_0_angle_15.jpg" width="96" height="96">
 <img src="face3d/examples/DataRotate/AFW_1051618982_1_0_angle_30.jpg" width="96" height="96">
@@ -23,7 +26,9 @@
 <img src="face3d/examples/DataRotate/AFW_1051618982_1_0_angle_60.jpg" width="96" height="96">
 </p>
 
-    - Rotate angle 15, 30, 45, 60
+```
+3. Rotate angle -15, -30, -45, -60
+```
 
  <p align="center"> 
 <img src="face3d/examples/DataRotate/AFW_1051618982_1_0_angle_-15.jpg" width="96" height="96">
@@ -50,13 +55,13 @@ data = data / 256 / 1.1
 
 ### 1、Generate train set
 
-* Downloading 300W-LP.zip、BFM.mat and BFM_UV.mat from [Baiduyun](https://pan.baidu.com/s/1uUZETcKy08eDXs08fUPTDA) password:``94cb``
+* Download BFM.mat、BFM_UV.mat、300W-LP.zip and **300W-LP-Rotate.tar.gz** from [Baiduyun](https://pan.baidu.com/s/1uUZETcKy08eDXs08fUPTDA) password:``94cb``
 
-* Puting BFM.mat and BFM_UV.mat to 
+* PutBFM.mat and BFM_UV.mat to 
 
 ``face3d/examples/Data/BFM/Out``
 
-and puting 300W-LP.zip to 
+and put 300W-LP.zip and **300W-LP-Rotate.tar.gz** to 
 
 ``face3d/examples/Data``
 
