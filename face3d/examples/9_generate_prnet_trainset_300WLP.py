@@ -82,7 +82,7 @@ def run_posmap_300W_LP(bfm, image_path, mat_path, save_folder,  uv_h=256, uv_w=2
 
     # 4. uv position map: render position in uv space
     uv_position_map = mesh.render.render_colors(uv_coords, bfm.full_triangles, position, uv_h, uv_w, c=3)
-
+    uv_position_map = uv_position_map.astype(np.float16)
     # 5. save files
     io.imsave('{}/{}'.format(save_folder, image_name), np.squeeze(cropped_image))
     np.save('{}/{}'.format(save_folder, image_name.replace('jpg', 'npy')), uv_position_map)
@@ -138,7 +138,7 @@ def generate_prnet_trainset(root_300wlp, save_trainset):
     bfm = MorphabelModel('Data/BFM/Out/BFM.mat')
 
     # run
-    fp_label = open('trainDataLabel.txt', "w")
+    fp_label = open('trainDataLabel_rotate.txt', "w")
     sub_dir_list = os.listdir(root_300wlp)
     for item in sub_dir_list:
         save_folder = os.path.join(save_trainset, item)
@@ -166,6 +166,6 @@ def generate_prnet_trainset(root_300wlp, save_trainset):
 
 
 if __name__ == '__main__':
-    root_300wlp = './Data/300W_LP'  # Maybe you should change it about you path
-    save_trainset = './Data/trainData'  # Maybe you should change it about you path
+    root_300wlp = './Data/300W_LP/All_Rotate'  # Maybe you should change it about you path
+    save_trainset = './Data/trainData_rotate'  # Maybe you should change it about you path
     generate_prnet_trainset(root_300wlp, save_trainset)

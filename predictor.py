@@ -35,7 +35,7 @@ class resfcn256(object):
                                      biases_initializer=None, 
                                      padding='SAME',
                                      weights_regularizer=tcl.l2_regularizer(0.0002)):
-                    size = 16  
+                    size = 16 
                     # x: s x s x 3
                     se = tcl.conv2d(x, num_outputs=size, kernel_size=4, stride=1) # 256 x 256 x 16
                     se = resBlock(se, num_outputs=size * 2, kernel_size=4, stride=2) # 128 x 128 x 32

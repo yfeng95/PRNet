@@ -6,7 +6,7 @@ import cv2
 import random
 from predictor import resfcn256
 import math
-
+from datetime import datetime
 
 class TrainData(object):
 
@@ -35,11 +35,9 @@ class TrainData(object):
             label = np.load(item[1])
 
             img_array = np.array(img, dtype=np.float32)
-            # imgs.append(img_array/255.0)
             imgs.append(img_array / 256.0 / 1.1)
 
-            label_array = np.array(img, dtype=np.float32)
-            # labels_array_norm = (label_array-label_array.min())/(label_array.max()-label_array.min())
+            label_array = np.array(label, dtype=np.float32)
             labels.append(label_array / 256 / 1.1)
 
         batch.append(imgs)
@@ -54,16 +52,12 @@ class TrainData(object):
             self.index += batch_num
 
             return batch_data
-        # elif self.index < self.num_data:
-        #     batch_list = self.train_data_list[self.index:self.num_data]
-        #     batch_data = self.getBatch(batch_list)
-        #     self.index = 0
-        #     return batch_data
         else:
             self.index = 0
             batch_list = self.train_data_list[self.index:(self.index + batch_num)]
             batch_data = self.getBatch(batch_list)
             self.index += batch_num
+
             return batch_data
 
 
@@ -77,7 +71,7 @@ def main(args):
     model_path = args.model_path
 
     save_dir = args.checkpoint
-    if not os.path.exists(save_dir):
+    if  not os.path.exists(save_dir):
         os.makedirs(save_dir)
 
     # Training data
@@ -105,7 +99,7 @@ def main(args):
     # Loss
     weights = cv2.imread("Data/uv-data/weight_mask_final.jpg")  # [256, 256, 3]
     weights_data = np.zeros([1, 256, 256, 3], dtype=np.float32)
-    weights_data[0, :, :, :] = weights / 16.0
+    weights_data[0, :, :, :] = weights # / 16.0
     loss = tf.losses.mean_squared_error(label, x_op, weights_data)
 
     # This is for batch norm layer
@@ -125,25 +119,32 @@ def main(args):
     save_path = model_path
 
     # Begining train
+    time_now = datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
+    fp_log = open("log_" + time_now + ".txt","w")
+    iters_total_each_epoch = int(math.ceil(1.0 * data.num_data / batch_size))
     for epoch in range(begin_epoch, epochs):
-        for iters in range(int(math.ceil(1.0 * data.num_data / batch_size))):
+        for iters in range(iters_total_each_epoch):
             batch = data(batch_size)
             loss_res, _, global_step_res, learning_rate_res = sess.run(
                 [loss, train_step, global_step, learning_rate], feed_dict={x: batch[0], label: batch[1]})
-
-            print('global_step:%d:iters:%d/epoch:%d,learning rate:%f,loss:%f' % (global_step_res, iters, epoch, learning_rate_res, loss_res))
+            
+            time_now_tmp = datetime.now().strftime("%Y-%m-%d_%H:%M:%S")
+            log_line = '[' + time_now_tmp + ']:' + 'global_step:%d:iters:%d/epoch:%d,learning rate:%f,loss:%f' % (global_step_res, iters, epoch, learning_rate_res, loss_res)
+            print(log_line)
+            fp_log.writelines(log_line + "\n")
 
         saver.save(sess=sess, save_path=save_path + '_' + str(epoch))
 
+    fp_log.close()
 
 if __name__ == '__main__':
 
     par = argparse.ArgumentParser(description='Joint 3D Face Reconstruction and Dense Alignment with Position Map Regression Network')
 
-    par.add_argument('--train_data_file', default='face3d/examples/trainDataLabel.txt', type=str, help='The training data file')
-    par.add_argument('--learning_rate', default=0.0001, type=float, help='The learning rate')
-    par.add_argument('--epochs', default=100, type=int, help='Total epochs')
-    par.add_argument('--batch_size', default=16, type=int, help='Batch sizes')
+    par.add_argument('--train_data_file', default='face3d/examples/trainDataLabelCorrect.txt', type=str, help='The training data file')
+    par.add_argument('--learning_rate', default=0.0002, type=float, help='The learning rate')
+    par.add_argument('--epochs', default=50, type=int, help='Total epochs')
+    par.add_argument('--batch_size', default=20, type=int, help='Batch sizes')
     par.add_argument('--checkpoint', default='checkpoint/', type=str, help='The path of checkpoint')
     par.add_argument('--model_path', default='checkpoint/256_256_resfcn256_weight', type=str, help='The path of pretrained model')
     par.add_argument('--gpu', default='0', type=str, help='The GPU ID')
