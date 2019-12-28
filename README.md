@@ -109,7 +109,6 @@ python3 train.py
 <img src="Data/sample-data/me_rotate/4_sparse.jpg" width="200" height="200">
 </p>
 
-
 --------------------------------------------------------------------------------------------------------------
 
 # Joint 3D Face Reconstruction and Dense Alignment with Position Map Regression Network
