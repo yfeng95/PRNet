@@ -118,7 +118,6 @@ python3 train.py
 </p>
 
 
-
 This is an official python implementation of PRN. 
 
 PRN is a method to jointly regress dense alignment and 3D face shape in an end-to-end manner. More examples on Multi-PIE and 300VW can be seen in [YouTube](https://youtu.be/tXTgLSyIha8) .
