@@ -57,7 +57,7 @@ data = data / 256 / 1.1
 
 * Download BFM.mat、BFM_UV.mat、300W-LP.zip and **300W-LP-Rotate.tar.gz** from [Baiduyun](https://pan.baidu.com/s/1uUZETcKy08eDXs08fUPTDA) password:``94cb``
 
-* PutBFM.mat and BFM_UV.mat to ``face3d/examples/Data/BFM/Out`` and put 300W-LP.zip and **300W-LP-Rotate.tar.gz** to ``face3d/examples/Data`` and unzip it. Then you should
+* Put BFM.mat and BFM_UV.mat to ``face3d/examples/Data/BFM/Out`` and put 300W-LP.zip and **300W-LP-Rotate.tar.gz** to ``face3d/examples/Data`` and unzip it. Then you should
 
 ```python
 cd face3d/face3d/mesh/cython/
