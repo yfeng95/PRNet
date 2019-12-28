@@ -57,15 +57,7 @@ data = data / 256 / 1.1
 
 * Download BFM.mat、BFM_UV.mat、300W-LP.zip and **300W-LP-Rotate.tar.gz** from [Baiduyun](https://pan.baidu.com/s/1uUZETcKy08eDXs08fUPTDA) password:``94cb``
 
-* PutBFM.mat and BFM_UV.mat to 
-
-``face3d/examples/Data/BFM/Out``
-
-and put 300W-LP.zip and **300W-LP-Rotate.tar.gz** to 
-
-``face3d/examples/Data``
-
-and unzip it. Then you should
+* PutBFM.mat and BFM_UV.mat to ``face3d/examples/Data/BFM/Out`` and put 300W-LP.zip and **300W-LP-Rotate.tar.gz** to ``face3d/examples/Data`` and unzip it. Then you should
 
 ```python
 cd face3d/face3d/mesh/cython/
@@ -99,7 +91,7 @@ python3 train.py
 <img src="Data/sample-data/author/4_sparse.jpg" width="200" height="200">
 </p>
 
-* Some results of me using trainset **300W-LP.zip** to train net(only 20 epochs) and pretrained model is [Morel_unrotate](https://pan.baidu.com/s/1uUZETcKy08eDXs08fUPTDA) password:``94cb``
+* Some results of me using trainset **300W-LP.zip** to train net(only 20 epochs) and pretrained model is [Model_unrotate](https://pan.baidu.com/s/1uUZETcKy08eDXs08fUPTDA) password:``94cb``
 
  <p align="center"> 
 <img src="Data/sample-data/me_unrotate/0_sparse.jpg" width="200" height="200">
@@ -108,7 +100,7 @@ python3 train.py
 <img src="Data/sample-data/me_unrotate/4_sparse.jpg" width="200" height="200">
 </p>
 
-* Some results of me using trainset **300W-LP.zip** and **+30,-30,+45,-45 angle data augmentation in 300W-LP-Rotate.tar.gz** to train net(only 20 epochs) and pretrained model is [Morel_rotate](https://pan.baidu.com/s/1uUZETcKy08eDXs08fUPTDA) password:``94cb``
+* Some results of me using trainset **300W-LP.zip** and **+30,-30,+45,-45 angle data augmentation in 300W-LP-Rotate.tar.gz** to train net(only 20 epochs) and pretrained model is [Model_rotate](https://pan.baidu.com/s/1uUZETcKy08eDXs08fUPTDA) password:``94cb``
 
  <p align="center"> 
 <img src="Data/sample-data/me_rotate/0_sparse.jpg" width="200" height="200">
