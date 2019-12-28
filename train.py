@@ -54,6 +54,7 @@ class TrainData(object):
             return batch_data
         else:
             self.index = 0
+            random.shuffle(self.train_data_list)
             batch_list = self.train_data_list[self.index:(self.index + batch_num)]
             batch_data = self.getBatch(batch_list)
             self.index += batch_num
