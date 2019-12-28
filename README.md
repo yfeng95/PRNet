@@ -93,28 +93,28 @@ python3 train.py
 * Some results of Author
 
  <p align="center"> 
-<img src="Data/sample-data/author/0_sparse.jpg" width="256" height="256">
-<img src="Data/sample-data/author/1_sparse.jpg" width="256" height="256">
-<img src="Data/sample-data/author/2_sparse.jpg" width="256" height="256">
-<img src="Data/sample-data/author/4_sparse.jpg" width="256" height="256">
+<img src="Data/sample-data/author/0_sparse.jpg" width="224" height="224">
+<img src="Data/sample-data/author/1_sparse.jpg" width="224" height="224">
+<img src="Data/sample-data/author/2_sparse.jpg" width="224" height="224">
+<img src="Data/sample-data/author/4_sparse.jpg" width="224" height="224">
 </p>
 
 * Some results of me using trainset **300W-LP.zip** to train net(only 20 epochs) and pretrained model is [Morel_unrotate](https://pan.baidu.com/s/1uUZETcKy08eDXs08fUPTDA) password:``94cb``
 
  <p align="center"> 
-<img src="Data/sample-data/me_unrotate/0_sparse.jpg" width="256" height="256">
-<img src="Data/sample-data/me_unrotate/1_sparse.jpg" width="256" height="256">
-<img src="Data/sample-data/me_unrotate/2_sparse.jpg" width="256" height="256">
-<img src="Data/sample-data/me_unrotate/4_sparse.jpg" width="256" height="256">
+<img src="Data/sample-data/me_unrotate/0_sparse.jpg" width="224" height="224">
+<img src="Data/sample-data/me_unrotate/1_sparse.jpg" width="224" height="224">
+<img src="Data/sample-data/me_unrotate/2_sparse.jpg" width="224" height="224">
+<img src="Data/sample-data/me_unrotate/4_sparse.jpg" width="224" height="224">
 </p>
 
 * Some results of me using trainset **300W-LP.zip** and **+30,-30,+45,-45 angle data augmentation in 300W-LP-Rotate.tar.gz** to train net(only 20 epochs) and pretrained model is [Morel_rotate](https://pan.baidu.com/s/1uUZETcKy08eDXs08fUPTDA) password:``94cb``
 
  <p align="center"> 
-<img src="Data/sample-data/me_rotate/0_sparse.jpg" width="256" height="256">
-<img src="Data/sample-data/me_rotate/1_sparse.jpg" width="256" height="256">
-<img src="Data/sample-data/me_rotate/2_sparse.jpg" width="256" height="256">
-<img src="Data/sample-data/me_rotate/4_sparse.jpg" width="256" height="256">
+<img src="Data/sample-data/me_rotate/0_sparse.jpg" width="224" height="224">
+<img src="Data/sample-data/me_rotate/1_sparse.jpg" width="224" height="224">
+<img src="Data/sample-data/me_rotate/2_sparse.jpg" width="224" height="224">
+<img src="Data/sample-data/me_rotate/4_sparse.jpg" width="224" height="224">
 </p>
 
 
