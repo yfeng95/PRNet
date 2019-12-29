@@ -1,10 +1,17 @@
 # Todo
 
-* Generate myself train set. I have know how to do it but not testing
-
 * Training Light weight net and convert to caffe or caffe2 and inference using C++
 
 # Update
+
+* ``2019-12-29:`` Generate my own trainset
+
+    - Step 1: Face alignment and get 68 landmarks by any methods
+
+    - Step 2: Compute ``Pose_Para``,``Shape_Para`` and ``Exp_Para`` by [3DDFA->3DMMFitting](http://www.cbsr.ia.ac.cn/users/xiangyuzhu/projects/3DDFA/main.htm) or [3DMMFitting.zip](https://pan.baidu.com/s/1uUZETcKy08eDXs08fUPTDA) password:``94cb`` (Here have depended files so recommended!)
+
+    - Step 3: Generate position map ground truth by ``face3d/examples/9_generate_prnet_trainset_300WLP.py``
+
 * ``2019-12-20:`` Data augmentation -- I rotate 300W-LP.zip with angle 15, 30, 45, 60, -15, -30, -45, -60 and get **300W-LP-Rotate.tar.gz**. Some samples is following:
 
 ```
