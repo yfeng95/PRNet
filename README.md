@@ -1,6 +1,6 @@
 # Todo
 
-* Training Light weight net and convert to caffe or caffe2 and inference using C++
+* Training Light weight net , then convert to caffe(caffe2) and ncnn!
 
 # Update
 
