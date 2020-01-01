@@ -81,7 +81,7 @@ Root/img2.jpg Root/img2.npy
 Root/img3.jpg Root/img3.npy
 ```
 
-### 2. Begining traing
+### 2. Begining train
 
 ```python
 python3 train.py
