@@ -58,7 +58,7 @@ data = data / 256 / 1.1
 
 * ``2019-4-1:`` Upload train.py
 
-# Traing PRNet
+# Training PRNet
 
 ### 1、Generate train set
 
