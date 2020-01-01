@@ -15,6 +15,16 @@ from utils.rotate_vertices import frontalize
 from utils.render_app import get_visibility, get_uv_mask, get_depth_image
 from utils.write import write_obj_with_colors, write_obj_with_texture
 
+
+def to255(arr):
+    tmp = np.zeros(arr.shape,dtype=np.uint8)
+    index_less_equal_one = arr <= 1
+    index_greater_one = arr > 1
+    tmp[index_less_equal_one] = arr[index_less_equal_one]*255
+    tmp[index_greater_one] = arr[index_greater_one]
+    
+    return tmp
+
 def main(args):
     if args.isShow or args.isTexture:
         import cv2
@@ -41,7 +51,7 @@ def main(args):
         name = image_path.strip().split('/')[-1][:-4]
 
         # read image
-        image = imread(image_path)
+        image = cv2.imread(image_path)
         [h, w, c] = image.shape
         if c>3:
             image = image[:,:,:3]
@@ -121,10 +131,17 @@ def main(args):
         if args.isShow:
             # ---------- Plot
             image_pose = plot_pose_box(image, camera_matrix, kpt)
-            cv2.imshow('sparse alignment', plot_kpt(image, kpt))
-            cv2.imshow('dense alignment', plot_vertices(image, vertices))
-            cv2.imshow('pose', plot_pose_box(image, camera_matrix, kpt))
-            cv2.waitKey(0)
+            sparse = plot_kpt(image, kpt)
+            dense = plot_vertices(image, vertices)
+            pose = plot_pose_box(image, camera_matrix, kpt)
+            cv2.imshow('sparse alignment', sparse)
+            cv2.imshow('dense alignment', dense)
+            cv2.imshow('pose', pose)
+            cv2.imwrite(os.path.join(save_folder, name + '_sparse.jpg'),to255(sparse))
+            cv2.imwrite(os.path.join(save_folder, name + '_dense.jpg'),to255(dense))
+            cv2.imwrite(os.path.join(save_folder, name + '_pose.jpg'),to255(pose))
+            if 27 == cv2.waitKey(0):
+                break
 
 
 if __name__ == '__main__':
@@ -146,7 +163,7 @@ if __name__ == '__main__':
                         help='whether to output key points(.txt)')
     parser.add_argument('--isPose', default=False, type=ast.literal_eval,
                         help='whether to output estimated pose(.txt)')
-    parser.add_argument('--isShow', default=False, type=ast.literal_eval,
+    parser.add_argument('--isShow', default=True, type=ast.literal_eval,
                         help='whether to show the results with opencv(need opencv)')
     parser.add_argument('--isImage', default=False, type=ast.literal_eval,
                         help='whether to save input image')

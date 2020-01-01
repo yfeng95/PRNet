@@ -1,9 +1,128 @@
+# Todo
+
+* Training Light weight net , then convert to caffe(caffe2) and ncnn!
+
+# Update
+
+* ``2019-12-29:`` Generate my own trainset
+
+    - Step 1: Face alignment and get 68 landmarks by any methods
+
+    - Step 2: Compute ``Pose_Para``,``Shape_Para`` and ``Exp_Para`` by [3DDFA->3DMMFitting](http://www.cbsr.ia.ac.cn/users/xiangyuzhu/projects/3DDFA/main.htm) or [3DMMFitting.zip](https://pan.baidu.com/s/1uUZETcKy08eDXs08fUPTDA) password:``94cb`` (Here have depended files so recommended!)
+
+    - Step 3: Generate position map ground truth by ``face3d/examples/9_generate_prnet_trainset_300WLP.py``
+
+* ``2019-12-20:`` Data augmentation -- I rotate 300W-LP.zip with angle 15, 30, 45, 60, -15, -30, -45, -60 and get **300W-LP-Rotate.tar.gz**. Some samples is following:
+
+```
+1. Original Image
+```
+
+ <p align="center"> 
+<img src="face3d/examples/DataRotate/AFW_1051618982_1_0.jpg" width="96" height="96">
+</p>
+
+```
+2. Rotate angle 15, 30, 45, 60
+```
+
+ <p align="center"> 
+<img src="face3d/examples/DataRotate/AFW_1051618982_1_0_angle_15.jpg" width="96" height="96">
+<img src="face3d/examples/DataRotate/AFW_1051618982_1_0_angle_30.jpg" width="96" height="96">
+<img src="face3d/examples/DataRotate/AFW_1051618982_1_0_angle_45.jpg" width="96" height="96">
+<img src="face3d/examples/DataRotate/AFW_1051618982_1_0_angle_60.jpg" width="96" height="96">
+</p>
+
+```
+3. Rotate angle -15, -30, -45, -60
+```
+
+ <p align="center"> 
+<img src="face3d/examples/DataRotate/AFW_1051618982_1_0_angle_-15.jpg" width="96" height="96">
+<img src="face3d/examples/DataRotate/AFW_1051618982_1_0_angle_-30.jpg" width="96" height="96">
+<img src="face3d/examples/DataRotate/AFW_1051618982_1_0_angle_-45.jpg" width="96" height="96">
+<img src="face3d/examples/DataRotate/AFW_1051618982_1_0_angle_-60.jpg" width="96" height="96">
+</p>
+
+* ``2019-12-1:`` Add loss weights image 
+
+<p align="center"> 
+<img src="Data\uv-data\weight_mask_final.jpg">
+</p>
+
+ and modify image & label(possion_map) normalize method 
+
+``
+data = data / 256 / 1.1
+``
+
+* ``2019-4-1:`` Upload train.py
+
+# Training PRNet
+
+### 1、Generate train set
+
+* Download BFM.mat、BFM_UV.mat、300W-LP.zip and **300W-LP-Rotate.tar.gz** from [Baiduyun](https://pan.baidu.com/s/1uUZETcKy08eDXs08fUPTDA) password:``94cb``
+
+* Put BFM.mat and BFM_UV.mat to ``face3d/examples/Data/BFM/Out`` and put 300W-LP.zip and **300W-LP-Rotate.tar.gz** to ``face3d/examples/Data`` and unzip it. Then you should
+
+```python
+cd face3d/face3d/mesh/cython/
+python3 setup build_ext -i
+cd face3d/examples
+python3 9_generate_prnet_trainset_300WLP.py # Maybe you should modify it about yourself
+```
+
+* Finally, you can get `trainDataLabel.txt` in `face3d/examples`, whos format is 
+
+```
+Root/img1.jpg Root/img1.npy
+Root/img2.jpg Root/img2.npy
+Root/img3.jpg Root/img3.npy
+```
+
+### 2. Begining train
+
+```python
+python3 train.py
+```
+
+### 3. Some results
+
+* Some results of Author
+
+ <p align="center"> 
+<img src="Data/sample-data/author/0_sparse.jpg" width="200" height="200">
+<img src="Data/sample-data/author/1_sparse.jpg" width="200" height="200">
+<img src="Data/sample-data/author/2_sparse.jpg" width="200" height="200">
+<img src="Data/sample-data/author/4_sparse.jpg" width="200" height="200">
+</p>
+
+* Some results of me using trainset **300W-LP.zip** to train net(only 20 epochs) and pretrained model is [Model_unrotate](https://pan.baidu.com/s/1uUZETcKy08eDXs08fUPTDA) password:``94cb``
+
+ <p align="center"> 
+<img src="Data/sample-data/me_unrotate/0_sparse.jpg" width="200" height="200">
+<img src="Data/sample-data/me_unrotate/1_sparse.jpg" width="200" height="200">
+<img src="Data/sample-data/me_unrotate/2_sparse.jpg" width="200" height="200">
+<img src="Data/sample-data/me_unrotate/4_sparse.jpg" width="200" height="200">
+</p>
+
+* Some results of me using trainset **300W-LP.zip** and **+30,-30,+45,-45 angle data augmentation in 300W-LP-Rotate.tar.gz** to train net(only 20 epochs) and pretrained model is [Model_rotate](https://pan.baidu.com/s/1uUZETcKy08eDXs08fUPTDA) password:``94cb``
+
+ <p align="center"> 
+<img src="Data/sample-data/me_rotate/0_sparse.jpg" width="200" height="200">
+<img src="Data/sample-data/me_rotate/1_sparse.jpg" width="200" height="200">
+<img src="Data/sample-data/me_rotate/2_sparse.jpg" width="200" height="200">
+<img src="Data/sample-data/me_rotate/4_sparse.jpg" width="200" height="200">
+</p>
+
+--------------------------------------------------------------------------------------------------------------
+
 # Joint 3D Face Reconstruction and Dense Alignment with Position Map Regression Network
 
 <p align="center"> 
 <img src="Docs/images/prnet.gif">
 </p>
-
 
 
 This is an official python implementation of PRN. 
