@@ -2,7 +2,7 @@ import ctypes
 import numpy as np
 from numpy.ctypeslib import ndpointer
 
-lib = ctypes.CDLL('./build/libfast_render.so')
+lib = ctypes.CDLL('./utils/fast_render/build/libfast_render.so')
 
 c_render_texture_loop = lib.render_texture_loop
 c_render_texture_loop.argtypes = [

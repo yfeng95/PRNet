@@ -3,6 +3,10 @@ Author: YadiraF
 Mail: fengyao@sjtu.edu.cn
 '''
 import numpy as np
+try:
+    from utils.fast_render import fast_render
+except BaseException as e:
+    print(e)
 
 def isPointInTri(point, tri_points):
     ''' Judge whether the point is in the triangle
@@ -99,24 +103,31 @@ def render_texture(vertices, colors, triangles, h, w, c = 3):
     tri_depth = (vertices[2, triangles[0,:]] + vertices[2,triangles[1,:]] + vertices[2, triangles[2,:]])/3. 
     tri_tex = (colors[:, triangles[0,:]] + colors[:,triangles[1,:]] + colors[:, triangles[2,:]])/3.
 
-    for i in range(triangles.shape[1]):
-        tri = triangles[:, i] # 3 vertex indices
+    triangles = np.ascontiguousarray(triangles)
+    vertices = np.ascontiguousarray(vertices)
 
-        # the inner bounding box
-        umin = max(int(np.ceil(np.min(vertices[0,tri]))), 0)
-        umax = min(int(np.floor(np.max(vertices[0,tri]))), w-1)
+    try:
+        fast_render.render_texture_loop(tri_depth, tri_tex, triangles, vertices, depth_buffer, image)
+    except:
+        for i in range(triangles.shape[1]):
+            tri = triangles[:, i] # 3 vertex indices
 
-        vmin = max(int(np.ceil(np.min(vertices[1,tri]))), 0)
-        vmax = min(int(np.floor(np.max(vertices[1,tri]))), h-1)
+            # the inner bounding box
+            umin = max(int(np.ceil(np.min(vertices[0,tri]))), 0)
+            umax = min(int(np.floor(np.max(vertices[0,tri]))), w-1)
 
-        if umax<umin or vmax<vmin:
-            continue
+            vmin = max(int(np.ceil(np.min(vertices[1,tri]))), 0)
+            vmax = min(int(np.floor(np.max(vertices[1,tri]))), h-1)
 
-        for u in range(umin, umax+1):
-            for v in range(vmin, vmax+1):
-                if tri_depth[i] > depth_buffer[v, u] and isPointInTri([u,v], vertices[:2, tri]): 
-                    depth_buffer[v, u] = tri_depth[i]
-                    image[v, u, :] = tri_tex[:, i]
+            if umax<umin or vmax<vmin:
+                continue
+
+            for u in range(umin, umax+1):
+                for v in range(vmin, vmax+1):
+                    if tri_depth[i] > depth_buffer[v, u] and isPointInTri([u,v], vertices[:2, tri]): 
+                        depth_buffer[v, u] = tri_depth[i]
+                        image[v, u, :] = tri_tex[:, i]
+
     return image
 
 
