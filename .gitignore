@@ -1,0 +1,6 @@
+# C extensions
+*.so
+*.o
+*.pyc
+
+utils/fast_render/build

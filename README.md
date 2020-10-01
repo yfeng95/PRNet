@@ -173,6 +173,12 @@ What you can custom:
 
    you can refer to  [c++ version](https://github.com/YadiraF/face3d/blob/master/face3d/mesh/render.py). 
 
+   Another alternative is to use the C++ already in this repo, integrated with ctypes. You must install both CMake and a C++ compiler, then run the following command: 
+   ```
+   sh build.sh
+   ```
+   This code only implements the hotpath of rendering the face depth map. The speedup from a 256x256 image was from 2681ms to 1.8ms, quite a difference.
+
    c. other parts like detecting face, writing obj
 
    the best way is to rewrite them in c++.
