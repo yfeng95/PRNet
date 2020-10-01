@@ -5,8 +5,11 @@ Mail: fengyao@sjtu.edu.cn
 import numpy as np
 try:
     from utils.fast_render import fast_render
+    using_fast_render = True
 except BaseException as e:
-    print(e)
+    print("INFO - You can run 'sh build.sh' to build a faster "
+            "rendering function for the depthmap images")
+    using_fast_render = False
 
 def isPointInTri(point, tri_points):
     ''' Judge whether the point is in the triangle
@@ -106,9 +109,9 @@ def render_texture(vertices, colors, triangles, h, w, c = 3):
     triangles = np.ascontiguousarray(triangles)
     vertices = np.ascontiguousarray(vertices)
 
-    try:
+    if using_fast_render:
         fast_render.render_texture_loop(tri_depth, tri_tex, triangles, vertices, depth_buffer, image)
-    except:
+    else:
         for i in range(triangles.shape[1]):
             tri = triangles[:, i] # 3 vertex indices
 
