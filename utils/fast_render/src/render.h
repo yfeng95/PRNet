@@ -12,6 +12,6 @@ extern "C" {
             const int *triangles, int triangles_width, int triangles_height,
             const double *vertices, int vertices_width, int vertices_height,
             double *depth_buffer, int depth_buffer_width, int depth_buffer_height,
-            double *image, int image_width, int image_height
+            double *image, int image_width, int image_height, int image_channels
         );
 }

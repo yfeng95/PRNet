@@ -18,7 +18,7 @@ void render_texture_loop(const double *tri_depth, int tri_depth_height,
         const int *triangles, int triangles_width, int triangles_height,
         const double *vertices, int vertices_width, int vertices_height,
         double *depth_buffer, int depth_buffer_width, int depth_buffer_height,
-        double *image, int image_width, int image_height)
+        double *image, int image_width, int image_height, int image_channels)
 {
     for (int i=0; i<triangles_width; i++) {
         // 3 vertex indices
@@ -51,7 +51,9 @@ void render_texture_loop(const double *tri_depth, int tri_depth_height,
                     if (PointInTriangle((double)u, (double)v, v1_u, v2_u, v3_u, v1_v, v2_v, v3_v)) {
                         depth_buffer[v*depth_buffer_width + u] = tri_depth[i];
                         for (int aux=0; aux<tri_tex_height; aux++) {
-                            image[v*image_width + u] = tri_tex[aux*tri_tex_width + i];
+                            for (int c=0; c<image_channels; c++) {
+                                image[v*image_width*image_channels + u*image_channels + c] = tri_tex[aux*tri_tex_width + i];
+                            }
                         }
                     }
                 }
