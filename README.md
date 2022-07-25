@@ -41,7 +41,7 @@ Get the 3D vertices and corresponding colours from a single image.  Save the res
 **New**: 
 
 1. you can choose to output mesh with its original pose(default) or with front view(which means all output meshes are aligned)
-2. obj file can now also written with texture map(with specified texture size), and you can set non-visible texture to 0. 
+2. obj file can now also be written with texture map(with specified texture size), and you can set non-visible texture to 0. 
 
 
 
@@ -149,11 +149,11 @@ What you can custom:
 
 2. the backbone of encoder-decoder network
 
-   this demo uses residual blocks. VGG, mobile-net are also ok.
+   this demo uses residual blocks. VGG and mobile-net are also ok.
 
 3. the weight mask
 
-   you can change the weight to focus more on which part your project need more.
+   you can change the weight to focus more on which part of your project needs more.
 
 4. the training data
 
@@ -171,7 +171,7 @@ What you can custom:
 
    b. render part
 
-   you can refer to  [c++ version](https://github.com/YadiraF/face3d/blob/master/face3d/mesh/render.py). 
+   you can refer to the [c++ version](https://github.com/YadiraF/face3d/blob/master/face3d/mesh/render.py). 
 
    c. other parts like detecting face, writing obj
 
@@ -185,7 +185,7 @@ What you can custom:
 
    b. texture precision.
 
-   I just added an option to specify the texture size. When the texture size > face size in original image, and render new facial image with [texture mapping](https://github.com/YadiraF/face3d/blob/04869dcee1455d1fa5b157f165a6878c550cf695/face3d/mesh/render.py), there will be little resample error.
+   I just added an option to specify the texture size. When the texture size > face size in original image, and rendered new facial image with [texture mapping](https://github.com/YadiraF/face3d/blob/04869dcee1455d1fa5b157f165a6878c550cf695/face3d/mesh/render.py), there will be little resampled error.
 
    
 
